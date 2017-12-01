@@ -18,9 +18,8 @@ class CrimeFragment : Fragment() {
         crime = Crime()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_crime, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            inflater?.inflate(R.layout.fragment_crime, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         crime_title.addTextChangedListener(object : TextWatcher {
