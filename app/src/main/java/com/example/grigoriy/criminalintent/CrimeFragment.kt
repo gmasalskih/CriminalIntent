@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.grigoriy.criminalintent.utils.getData
 import kotlinx.android.synthetic.main.fragment_crime.*
 
 class CrimeFragment : Fragment() {
@@ -35,7 +36,7 @@ class CrimeFragment : Fragment() {
 //                TODO("not implemented")
             }
         })
-        crime_date.text = crime.date.toString()
+        crime_date.text = getData(crime.date)
         crime_date.isEnabled = false
         crime_solved.setOnCheckedChangeListener { _, isChecked ->
             crime.solved = isChecked

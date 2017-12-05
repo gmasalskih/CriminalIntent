@@ -16,14 +16,14 @@ class CrimeListFragment : Fragment() {
     private lateinit var crimeRecyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val view = LayoutInflater.from(activity).inflate(R.layout.fragment_crime_list, container, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.fragment_crime_list, container, false)
         crimeRecyclerView = view.crime_recycler_view
-        crimeRecyclerView.layoutManager = LinearLayoutManager(activity)
+        crimeRecyclerView.layoutManager = LinearLayoutManager(context)
         updateUI()
         return view
     }
 
     private fun updateUI() {
-        crimeRecyclerView.adapter = CrimeAdapter(CrimeLab.crimes, activity)
+        crimeRecyclerView.adapter = CrimeAdapter(CrimeLab.crimes)
     }
 }
