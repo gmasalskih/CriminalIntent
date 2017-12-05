@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.grigoriy.criminalintent.Crime
+import com.example.grigoriy.criminalintent.CrimeActivity
 import com.example.grigoriy.criminalintent.R
 import com.example.grigoriy.criminalintent.utils.getData
 import kotlinx.android.synthetic.main.list_item_crime.view.*
@@ -30,7 +31,7 @@ class CrimeAdapter(private val crimes: List<Crime>) : RecyclerView.Adapter<Crime
             view.crime_date.text = getData(crime.date)
             view.crime_solved.visibility= if (crime.solved!!) View.VISIBLE else View.GONE
             view.setOnClickListener {
-                Toast.makeText(view.context, crime.title, Toast.LENGTH_SHORT).show()
+                view.context.startActivity(CrimeActivity.newIntent(view.context, crime.id))
             }
         }
     }

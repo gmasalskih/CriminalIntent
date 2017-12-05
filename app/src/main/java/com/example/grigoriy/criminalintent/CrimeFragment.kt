@@ -9,18 +9,32 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.grigoriy.criminalintent.utils.getData
 import kotlinx.android.synthetic.main.fragment_crime.*
+import java.util.*
 
 class CrimeFragment : Fragment() {
 
     lateinit var crime: Crime
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        crime = Crime()
+    companion object {
+        val ARG_CRIME_ID = "crime_id"
+        fun newInstance(crimeId: UUID): CrimeFragment {
+            val args = Bundle()
+            args.putSerializable(ARG_CRIME_ID, crimeId)
+            val fragment = CrimeFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.fragment_crime, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        crime = CrimeLab.getCrime(arguments.getSerializable(ARG_CRIME_ID) as UUID)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?{
+        return inflater?.inflate(R.layout.fragment_crime, container, false)
+    }
+
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         crime_title.addTextChangedListener(object : TextWatcher {
@@ -37,7 +51,9 @@ class CrimeFragment : Fragment() {
             }
         })
         crime_date.text = getData(crime.date)
-        crime_date.isEnabled = false
+        crime_date.isEnabled = crime.solved!!
+        crime_title.setText(crime.title)
+        crime_solved.isChecked = crime.solved!!
         crime_solved.setOnCheckedChangeListener { _, isChecked ->
             crime.solved = isChecked
         }

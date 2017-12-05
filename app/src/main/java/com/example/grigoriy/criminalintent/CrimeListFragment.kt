@@ -23,6 +23,11 @@ class CrimeListFragment : Fragment() {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateUI()
+    }
+
     private fun updateUI() {
         crimeRecyclerView.adapter = CrimeAdapter(CrimeLab.crimes)
     }
