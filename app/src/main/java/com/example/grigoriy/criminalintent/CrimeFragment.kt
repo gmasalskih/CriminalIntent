@@ -7,7 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.grigoriy.criminalintent.utils.getData
+import com.example.grigoriy.criminalintent.utils.toFormattedString
 import kotlinx.android.synthetic.main.fragment_crime.*
 import java.util.*
 
@@ -35,7 +35,6 @@ class CrimeFragment : Fragment() {
         return inflater?.inflate(R.layout.fragment_crime, container, false)
     }
 
-
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         crime_title.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(chars: CharSequence?, start: Int, before: Int, count: Int) {
@@ -50,7 +49,7 @@ class CrimeFragment : Fragment() {
 //                TODO("not implemented")
             }
         })
-        crime_date.text = getData(crime.date)
+        crime_date.text = crime.date.toFormattedString()
         crime_date.isEnabled = crime.solved!!
         crime_title.setText(crime.title)
         crime_solved.isChecked = crime.solved!!

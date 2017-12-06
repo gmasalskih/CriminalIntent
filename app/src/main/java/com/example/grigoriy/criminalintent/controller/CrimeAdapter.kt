@@ -4,11 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.example.grigoriy.criminalintent.Crime
 import com.example.grigoriy.criminalintent.CrimeActivity
 import com.example.grigoriy.criminalintent.R
-import com.example.grigoriy.criminalintent.utils.getData
+import com.example.grigoriy.criminalintent.utils.toFormattedString
 import kotlinx.android.synthetic.main.list_item_crime.view.*
 
 class CrimeAdapter(private val crimes: List<Crime>) : RecyclerView.Adapter<CrimeAdapter.CrimeViewHolder>() {
@@ -26,10 +25,10 @@ class CrimeAdapter(private val crimes: List<Crime>) : RecyclerView.Adapter<Crime
     inner class CrimeViewHolder(private var view: View) : RecyclerView.ViewHolder(view) {
 
         fun bindView(position: Int) {
-            var crime = crimes.get(position)
+            var crime = crimes[position]
             view.crime_title.text = crime.title
-            view.crime_date.text = getData(crime.date)
-            view.crime_solved.visibility= if (crime.solved!!) View.VISIBLE else View.GONE
+            view.crime_date.text = crime.date.toFormattedString()
+            view.crime_solved.visibility = if (crime.solved!!) View.VISIBLE else View.GONE
             view.setOnClickListener {
                 view.context.startActivity(CrimeActivity.newIntent(view.context, crime.id))
             }

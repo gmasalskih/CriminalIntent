@@ -1,6 +1,5 @@
 package com.example.grigoriy.criminalintent
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -29,6 +28,7 @@ class CrimeListFragment : Fragment() {
     }
 
     private fun updateUI() {
-        crimeRecyclerView.adapter = CrimeAdapter(CrimeLab.crimes)
+        if (crimeRecyclerView.adapter == null) crimeRecyclerView.adapter = CrimeAdapter(CrimeLab.crimes)
+        else crimeRecyclerView.adapter.notifyDataSetChanged()
     }
 }
